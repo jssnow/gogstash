@@ -1,4 +1,4 @@
-gogstash
+LogForce
 ========
 
 Logstash like, written in golang

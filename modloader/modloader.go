@@ -11,6 +11,7 @@ import (
 	"github.com/tsaikd/gogstash/filter/grok"
 	"github.com/tsaikd/gogstash/filter/json"
 	"github.com/tsaikd/gogstash/filter/mutate"
+	"github.com/tsaikd/gogstash/filter/performance"
 	"github.com/tsaikd/gogstash/filter/ratelimit"
 	"github.com/tsaikd/gogstash/filter/removefield"
 	"github.com/tsaikd/gogstash/filter/typeconv"
@@ -65,6 +66,7 @@ func init() {
 	config.RegistFilterHandler(filtertypeconv.ModuleName, filtertypeconv.InitHandler)
 	config.RegistFilterHandler(filteruseragent.ModuleName, filteruseragent.InitHandler)
 	config.RegistFilterHandler(filterurlparam.ModuleName, filterurlparam.InitHandler)
+	config.RegistFilterHandler(filterperformance.ModuleName, filterperformance.InitHandler)
 
 	config.RegistOutputHandler(outputamqp.ModuleName, outputamqp.InitHandler)
 	config.RegistOutputHandler(outputcond.ModuleName, outputcond.InitHandler)

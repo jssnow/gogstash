@@ -2,14 +2,14 @@ package outputstdout
 
 import (
 	"context"
-	"fmt"
-
 	"github.com/tsaikd/gogstash/config"
 	"github.com/tsaikd/gogstash/config/logevent"
 )
 
 // ModuleName is the name used in config file
 const ModuleName = "stdout"
+
+var outCount int
 
 // OutputConfig holds the configuration json fields and internal objects
 type OutputConfig struct {
@@ -40,11 +40,12 @@ func InitHandler(ctx context.Context, raw *config.ConfigRaw) (config.TypeOutputC
 
 // Output event
 func (t *OutputConfig) Output(ctx context.Context, event logevent.LogEvent) (err error) {
-	raw, err := event.MarshalIndent()
+	_, err = event.MarshalIndent()
 	if err != nil {
 		return
 	}
-
-	fmt.Println(string(raw))
+	//outCount++
+	//fmt.Println(outCount)
+	//fmt.Println(string(raw))
 	return
 }

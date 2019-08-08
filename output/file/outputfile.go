@@ -200,7 +200,8 @@ func (t *OutputConfig) Output(ctx context.Context, event logevent.LogEvent) (err
 		}()
 	}
 
-	log := event.Format(t.Codec)
+	//log := event.Format(t.Codec)
+	log := event.Message
 	channel <- log
 	return
 }

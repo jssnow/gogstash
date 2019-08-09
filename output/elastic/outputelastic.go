@@ -8,7 +8,7 @@ import (
 	"time"
 
 	jsoniter "github.com/json-iterator/go"
-	"github.com/olivere/elastic/v7"
+	"github.com/olivere/elastic"
 	"github.com/sirupsen/logrus"
 	"github.com/tsaikd/KDGoLib/errutil"
 	"github.com/tsaikd/gogstash/config"
@@ -24,10 +24,10 @@ type OutputConfig struct {
 	config.OutputConfig
 	URL             []string `json:"url"` // elastic API entrypoints
 	resolvedURLs    []string // URLs after resolving environment vars
-	Index           string   `json:"index"`             // index name to log
-	DocumentType    string   `json:"document_type"`     // type name to log
-	DocumentID      string   `json:"document_id"`       // id to log, used if you want to control id format
-	RetryOnConflict int      `json:"retry_on_conflict"` // the number of times Elasticsearch should internally retry an update/upserted document
+	Index           string   `json:"index"`              // index name to log
+	DocumentType    string   `json:"document_type"`      // type name to log
+	DocumentID      string   `json:"document_id"`        // id to log, used if you want to control id format
+	RetryOnConflict int      `json:"_retry_on_conflict"` // the number of times Elasticsearch should internally retry an update/upserted document
 
 	Sniff bool `json:"sniff"` // find all nodes of your cluster, https://github.com/olivere/elastic/wiki/Sniffing
 
@@ -154,7 +154,7 @@ func InitHandler(ctx context.Context, raw *config.ConfigRaw) (config.TypeOutputC
 		BulkActions(conf.BulkActions).
 		BulkSize(conf.BulkSize).
 		FlushInterval(conf.BulkFlushInterval).
-		Backoff(elastic.NewExponentialBackoff(conf.exponentialBackoffInitialTimeout, conf.exponentialBackoffMaxTimeout)).
+		//Backoff(elastic.NewExponentialBackoff(conf.exponentialBackoffInitialTimeout, conf.exponentialBackoffMaxTimeout)).
 		After(conf.BulkAfter).
 		Do(ctx)
 	if err != nil {
@@ -183,11 +183,13 @@ func (t *OutputConfig) Output(ctx context.Context, event logevent.LogEvent) (err
 	index := event.Format(t.Index)
 	// elastic index name should be lowercase
 	index = strings.ToLower(index)
+	doctype := event.Format(t.DocumentType)
 	id := event.Format(t.DocumentID)
 
 	indexRequest := elastic.NewBulkIndexRequest().
 		Index(index).
-		RetryOnConflict(t.RetryOnConflict).
+		//RetryOnConflict(t.RetryOnConflict).
+		Type(doctype).
 		Id(id).
 		Doc(event)
 	t.processor.Add(indexRequest)

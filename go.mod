@@ -33,7 +33,8 @@ require (
 	github.com/mitchellh/mapstructure v0.0.0-20180715050151-f15292f7a699 // indirect
 	github.com/nats-io/nats-server/v2 v2.0.0
 	github.com/nats-io/nats.go v1.8.1
-	github.com/olivere/elastic/v7 v7.0.4
+	github.com/olivere/elastic v6.0.0+incompatible
+	github.com/olivere/elastic/v7 v7.0.5
 	github.com/onsi/ginkgo v1.8.0 // indirect
 	github.com/onsi/gomega v1.5.0 // indirect
 	github.com/oschwald/geoip2-golang v1.2.1

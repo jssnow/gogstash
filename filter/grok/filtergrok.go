@@ -2,6 +2,7 @@ package filtergrok
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/tsaikd/gogstash/config"
 	"github.com/tsaikd/gogstash/config/goglog"
@@ -76,6 +77,7 @@ func (f *FilterConfig) Event(ctx context.Context, event logevent.LogEvent) (loge
 	message := event.GetString(f.Source)
 	found := false
 	for _, thisMatch := range f.Match {
+
 		// grok Parse will success even it doesn't match
 		values, err := f.grk.ParseTyped(thisMatch, message)
 		if err == nil && len(values) > 0 {
@@ -91,6 +93,8 @@ func (f *FilterConfig) Event(ctx context.Context, event logevent.LogEvent) (loge
 				}
 			}
 			break
+		} else {
+			fmt.Println(err)
 		}
 	}
 

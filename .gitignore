@@ -9,3 +9,5 @@
 .idea
 *.i*
 *.log
+sincedb.json
+goforce

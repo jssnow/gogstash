@@ -2,6 +2,7 @@ package outputstdout
 
 import (
 	"context"
+	"fmt"
 	"github.com/tsaikd/gogstash/config"
 	"github.com/tsaikd/gogstash/config/logevent"
 )
@@ -40,12 +41,12 @@ func InitHandler(ctx context.Context, raw *config.ConfigRaw) (config.TypeOutputC
 
 // Output event
 func (t *OutputConfig) Output(ctx context.Context, event logevent.LogEvent) (err error) {
-	_, err = event.MarshalIndent()
+	raw, err := event.MarshalIndent()
 	if err != nil {
 		return
 	}
 	//outCount++
 	//fmt.Println(outCount)
-	//fmt.Println(string(raw))
+	fmt.Println(string(raw))
 	return
 }

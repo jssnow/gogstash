@@ -12,7 +12,7 @@ require (
 	github.com/elastic/go-lumber v0.1.0
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/fsouza/go-dockerclient v1.3.6
-	github.com/go-sql-driver/mysql v1.4.1 // indirect
+	github.com/go-xorm/xorm v0.7.6
 	github.com/golang/mock v1.3.1
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/hashicorp/go-version v0.0.0-20180716215031-270f2f71b1ee // indirect
@@ -25,11 +25,8 @@ require (
 	github.com/kardianos/osext v0.0.0-20170510131534-ae77be60afb1 // indirect
 	github.com/klauspost/compress v1.4.1 // indirect
 	github.com/klauspost/cpuid v1.2.0 // indirect
-	github.com/kr/pretty v0.1.0 // indirect
-	github.com/lib/pq v0.0.0-20180523175426-90697d60dd84 // indirect
 	github.com/libp2p/go-reuseport v0.0.1
 	github.com/magiconair/properties v1.8.0 // indirect
-	github.com/mattn/go-sqlite3 v1.10.0 // indirect
 	github.com/mitchellh/mapstructure v0.0.0-20180715050151-f15292f7a699 // indirect
 	github.com/nats-io/nats-server/v2 v2.0.0
 	github.com/nats-io/nats.go v1.8.1
@@ -58,7 +55,6 @@ require (
 	github.com/vjeantet/grok v1.0.0
 	github.com/yuin/gopher-lua v0.0.0-20190206043414-8bfc7677f583 // indirect
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58
-	google.golang.org/appengine v1.5.0 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/redis.v5 v5.2.9

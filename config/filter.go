@@ -2,7 +2,6 @@ package config
 
 import (
 	"context"
-
 	"github.com/tsaikd/KDGoLib/errutil"
 	"github.com/tsaikd/gogstash/config/logevent"
 )
@@ -12,6 +11,9 @@ var (
 	ErrorUnknownFilterType1 = errutil.NewFactory("unknown filter config type: %q")
 	ErrorInitFilterFailed1  = errutil.NewFactory("initialize filter module failed: %v")
 )
+
+// 标记是否丢弃该条日志
+const DropTag = "drop"
 
 // TypeFilterConfig is interface of filter module
 type TypeFilterConfig interface {
@@ -108,7 +110,17 @@ func (t *Config) startFilters() (err error) {
 						event = filter.CommonFilter(t.ctx, event)
 					}
 				}
-				t.chFilterOut <- event
+				//是否丢弃该条日志
+				ok = true
+				for _, tag := range event.Tags {
+					if tag == DropTag {
+						ok = false
+					}
+				}
+
+				if ok {
+					t.chFilterOut <- event
+				}
 			}
 		}
 	})

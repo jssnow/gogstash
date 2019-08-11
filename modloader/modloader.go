@@ -3,6 +3,7 @@ package modloader
 import (
 	"github.com/tsaikd/gogstash/codec/json"
 	"github.com/tsaikd/gogstash/config"
+	"github.com/tsaikd/gogstash/filter/accesscount"
 	"github.com/tsaikd/gogstash/filter/addfield"
 	"github.com/tsaikd/gogstash/filter/cond"
 	"github.com/tsaikd/gogstash/filter/date"
@@ -54,6 +55,7 @@ func init() {
 	config.RegistInputHandler(inputredis.ModuleName, inputredis.InitHandler)
 	config.RegistInputHandler(inputsocket.ModuleName, inputsocket.InitHandler)
 
+	config.RegistFilterHandler(filteraccesscount.ModuleName, filteraccesscount.InitHandler)
 	config.RegistFilterHandler(filteraddfield.ModuleName, filteraddfield.InitHandler)
 	config.RegistFilterHandler(filtercond.ModuleName, filtercond.InitHandler)
 	config.RegistFilterHandler(filterdate.ModuleName, filterdate.InitHandler)
